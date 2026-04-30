@@ -15,9 +15,8 @@ import java.io.IOException;
 
 public class TelaPrincipal extends Application {
     //#1b3f00
-    private static final String COR_PADRAO = "#1b3f55";
-    private static final String COR_HOVER = "#4189BCFF";
-    private static final String TEXTO_BRANCO = "-fx-text-fill: #ffffff ";
+    private static final String COR_PADRAO = "-fx-background-color: #1b3f55 ; -fx-text-fill: #ffffff ; -fx-alignment: center; -fx-cursor: hand";
+    private static final String COR_HOVER = "-fx-background-color: #4189BCFF ; -fx-text-fill: #ffffff ; -fx-alignment: center; -fx-cursor: hand";
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,7 +46,6 @@ public class TelaPrincipal extends Application {
         );
 
         raiz.setLeft(painelLateral);
-        //raiz.setStyle("-fx-background-color: #416fbc");
 
         PainelHome painelHome = new PainelHome();
 
@@ -55,9 +53,7 @@ public class TelaPrincipal extends Application {
 
         Scene cena = new Scene(raiz, 900, 600);
         stage.setScene(cena);
-        //stage.setResizable(false);
         stage.setMaximized(true);
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("/Brasil.ico")));
         stage.setTitle("Sistema de Gestão de Jogos V1.0");
         stage.getIcons().add(iconeTela);
         stage.show();
@@ -75,20 +71,17 @@ public class TelaPrincipal extends Application {
     private void aplicarEfeitoHover(Button... botoes){
 
         for (Button button : botoes){
-            button.setStyle("-fx-background-color: " + COR_PADRAO + ";" + TEXTO_BRANCO);
+            button.setStyle( COR_PADRAO);
 
             // Ao passar no botão
             button.setOnMouseEntered(e -> {
-                button.setStyle("-fx-background-color: " + COR_HOVER + ";" + TEXTO_BRANCO +";" + "-fx-alignment: center; -fx-cursor: hand");
+                button.setStyle(COR_HOVER);
             });
 
             // Ao sair do botão
             button.setOnMouseExited(e -> {
-                button.setStyle("-fx-background-color: " + COR_PADRAO + ";" + TEXTO_BRANCO);
+                button.setStyle(COR_PADRAO);
             });
-
         }
-
     }
-
 }
