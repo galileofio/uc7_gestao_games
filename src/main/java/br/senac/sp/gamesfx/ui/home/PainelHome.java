@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 
@@ -21,15 +22,22 @@ public class PainelHome {
 
         // Painel de Titulo
         VBox painelTitulo = new VBox();
-        painelTitulo.setStyle("-fx-background-color: #84d1b9;");
-        Label lblTitulo = new Label("Seja Bem-vindo!");
-        lblTitulo.setStyle("-fx-font-size: 24;-fx-font-weight: bold");
+        painelTitulo.setStyle("-fx-background-color: transparent");
+        Label lblTitulo = new Label("Sejam Bem-vindos!");
+        lblTitulo.setStyle("-fx-font-size: 24; -fx-text-fill: #ffffff ; -fx-font-weight: bold");
 
         painelTitulo.getChildren().addAll(lblTitulo,new Separator());
+
+        VBox painelLogo = new VBox();
+        painelLogo.setAlignment(Pos.CENTER);
 
         // Imagem da Aplicação
         Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/pikaxu.png"));
         ImageView ivLogo = new ImageView(imgLogo);
+        //ivLogo.setScaleX(); codigo para mudar tamanho imagem - horizontal
+        //ivLogo.setScaleX(); codigo para mudar tamanho imagem - vertical
+
+        VBox.setVgrow(painelLogo, Priority.ALWAYS);
 
         // Textos com nome e descrição da aplicação
         Label lblNomeApp = new Label("Game Aleixo Pro");
@@ -38,13 +46,39 @@ public class PainelHome {
         Label lblDescApp = new Label("Software para Gestão de Jogos");
         lblDescApp.setStyle("-fx-font-weight: regular ; -fx-font-size: 25 ; -fx-text-fill: #ffffff");
 
-        painelPrincipal.getChildren().addAll(
-                painelTitulo,
-                ivLogo,
-                lblNomeApp,
-                lblDescApp
+
+        // Criar Painel de Contatos
+        VBox painelContatos = new VBox(2);
+        painelContatos.setStyle("-fx-background-color: #6ad2ee; -fx-border-width: 3; -fx-border-color:blue;-fx-border-radius:16;-fx-background-radius: 16");
+        painelContatos.setMaxWidth(600);
+        painelContatos.setPadding(new Insets(20));
+        VBox.setMargin(painelContatos, new Insets(25,10,40,10));
+
+
+        Label lblTituloEmail = new Label("E-mail para Suporte:");
+        lblTituloEmail.setStyle("-fx-font-size: 18; -fx-font-weight: bold");
+        Label lblEmail = new Label("suporte@aleixosoft.com");
+        lblEmail.setStyle("-fx-font-size: 15");
+        Label lblTituloTelefone = new Label("Telefone para Suporte:");
+        lblTituloTelefone.setStyle("-fx-font-size: 18; -fx-font-weight: bold");
+        Label lblTelefone = new Label("(11)1234-5678");
+        lblTelefone.setStyle("-fx-font-size: 15");
+
+
+        painelContatos.getChildren().addAll(
+                lblTituloEmail,
+                lblEmail,
+                lblTituloTelefone,
+                lblTelefone
         );
 
+
+        Label lblDesenvolvidoPor = new Label("Desenvolvido por AleixoSoft - 2026");
+        lblDesenvolvidoPor.setStyle("-fx-font-size: 20;-fx-text-fill: #ffffff; -fx-font-weight: bold");
+
+        painelLogo.getChildren().addAll(ivLogo,lblNomeApp,lblDescApp,painelContatos, lblDesenvolvidoPor);
+
+        painelPrincipal.getChildren().addAll(painelTitulo,painelLogo);
         return painelPrincipal;
     }
 }

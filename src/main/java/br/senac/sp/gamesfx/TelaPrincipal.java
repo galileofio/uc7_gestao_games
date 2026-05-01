@@ -1,6 +1,7 @@
 package br.senac.sp.gamesfx;
 
 import br.senac.sp.gamesfx.ui.home.PainelHome;
+import br.senac.sp.gamesfx.ui.jogos.PainelJogos;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -14,9 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class TelaPrincipal extends Application {
-    //#1b3f00
+
     private static final String COR_PADRAO = "-fx-background-color: #1b3f55 ; -fx-text-fill: #ffffff ; -fx-alignment: center; -fx-cursor: hand";
-    private static final String COR_HOVER = "-fx-background-color: #4189BCFF ; -fx-text-fill: #ffffff ; -fx-alignment: center; -fx-cursor: hand";
+    private static final String COR_HOVER  = "-fx-background-color: #4189BCFF ; -fx-text-fill: #ffffff ; -fx-alignment: center; -fx-cursor: hand";
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -32,9 +33,18 @@ public class TelaPrincipal extends Application {
         painelLateral.setPadding(new Insets(10));
 
         Button btnJogos = criarBotaoMenu("Jogos");
+        btnJogos.setOnAction(clique -> {
+            PainelJogos painelJogos = new PainelJogos();
+            raiz.setCenter(painelJogos.criarPainelJogos());
+        });
+
         Button btnPlataformas =criarBotaoMenu("Plataformas");
         Button btnEstudios = criarBotaoMenu("Estudios");
         Button btnHome = criarBotaoMenu("Home");
+        btnHome.setOnAction(clique -> {
+            PainelHome painelHome = new PainelHome();
+            raiz.setCenter(painelHome.criarPainelHome());
+        });
 
         aplicarEfeitoHover(btnJogos, btnHome, btnEstudios, btnPlataformas);
 
@@ -64,7 +74,6 @@ public class TelaPrincipal extends Application {
         Button button = new Button(TextoDoBotao);
         button.setPadding(new Insets(10));
         button.setPrefWidth(Double.MAX_VALUE);
-        //button.setStyle("-fx-background-color: #1b3f55; -fx-text-fill: #ffffff; -fx-alignment: center; -fx-cursor: hand");
         return button;
     }
 
