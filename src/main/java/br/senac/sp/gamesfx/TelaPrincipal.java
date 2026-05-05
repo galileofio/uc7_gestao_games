@@ -22,7 +22,7 @@ public class TelaPrincipal extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Image iconeTela = new Image(getClass().getResourceAsStream("/imagens/game.png"));
+        Image iconeTela = new Image(getClass().getResourceAsStream("/imagens/brazil.png"));
 
         BorderPane raiz = new BorderPane();
 
