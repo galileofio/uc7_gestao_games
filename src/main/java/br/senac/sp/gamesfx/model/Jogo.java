@@ -13,15 +13,10 @@ public class Jogo {
     private LocalDate dataLancamento;
     private boolean finalizado;
 
-    public Jogo(int id, String titulo, String plataforma, String categoria, String estudio, double preco, LocalDate dataLancamento, boolean finalizado) {
+    public Jogo(int id, String titulo, String plataforma) {
         this.id = id;
         this.titulo = titulo;
         this.plataforma = plataforma;
-        this.categoria = categoria;
-        this.estudio = estudio;
-        this.preco = preco;
-        this.dataLancamento = dataLancamento;
-        this.finalizado = false;
     }
 
     public int getId() {
