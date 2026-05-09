@@ -5,6 +5,7 @@ import br.senac.sp.gamesfx.model.Jogo;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -55,7 +56,7 @@ public class PainelJogos {
 
         TableColumn<Jogo, String> colunaPlataforma = new TableColumn<>("PLATAFORMA");
         colunaPlataforma.setCellValueFactory(new PropertyValueFactory<>("plataforma"));
-        colunaPlataforma.setPrefWidth(100);
+        colunaPlataforma.setPrefWidth(140);
 
 //        TableColumn<Jogo, String> colunaCategoria = new TableColumn<>("CATEGORIA");
 //        colunaCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
@@ -85,19 +86,37 @@ public class PainelJogos {
         painelBotoes.setAlignment(Pos.BASELINE_RIGHT);
 
         // Criar os Botoes
-        Button btnAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
+        Button btnAdicionar = criarBotao("", "/imagens/adicionar.png");
+        btnAdicionar.setCursor(Cursor.HAND);
+        btnAdicionar.setTooltip(new Tooltip("ADICIONAR"));
         btnAdicionar.setOnAction(e -> {
             TelaJogo telaJogo = new TelaJogo();
             telaJogo.criarTela(stage);
         });
 
-        Button btnMostrar = criarBotao("Mostrar", "/imagens/mostrar.png");
-        Button btnAlterar = criarBotao("Alterar", "/imagens/alterar.png");
-        Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
+        Button btnMostrar = criarBotao("", "/imagens/mostrar.png");
+        btnMostrar.setCursor(Cursor.HAND);
+        btnMostrar.setTooltip(new Tooltip("MOSTRAR"));
 
+        Button btnAlterar = criarBotao("", "/imagens/alterar.png");
+        btnAlterar.setCursor(Cursor.HAND);
+        btnAlterar.setTooltip(new Tooltip("ALTERAR"));
+
+        Button btnExcluir = criarBotao("", "/imagens/excluir.png");
+        btnExcluir.setCursor(Cursor.HAND);
+        btnExcluir.setTooltip(new Tooltip("EXCLUIR"));
+
+//        Button btnAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
+//        btnAdicionar.setOnAction(e -> {
+//            TelaJogo telaJogo = new TelaJogo();
+//            telaJogo.criarTela(stage);
+//        });
+//
+//        Button btnMostrar = criarBotao("Mostrar", "/imagens/mostrar.png");
+//        Button btnAlterar = criarBotao("Alterar", "/imagens/alterar.png");
+//        Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
 
         painelBotoes.getChildren().addAll(btnAdicionar, btnMostrar, btnAlterar, btnExcluir);
-
 
         // Adicionar as colunas na tabela
         tabelaJogos.getColumns().addAll(colunaId, colunaTitulo, colunaPlataforma
@@ -110,7 +129,6 @@ public class PainelJogos {
 
         // Adicionar o Label no painel
         painelJogos.getChildren().addAll(lblTitulo, linha, tabelaJogos, painelBotoes);
-
 
         return painelJogos;
     }
@@ -133,5 +151,4 @@ public class PainelJogos {
 
         return button;
     }
-
 }

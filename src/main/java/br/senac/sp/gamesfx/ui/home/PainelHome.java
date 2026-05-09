@@ -32,7 +32,7 @@ public class PainelHome {
         painelLogo.setAlignment(Pos.CENTER);
 
         // Imagem da Aplicação
-        Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/pikaxu.png"));
+        Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/PacMan.png"));
         ImageView ivLogo = new ImageView(imgLogo);
         //ivLogo.setScaleX(); codigo para mudar tamanho imagem - horizontal
         //ivLogo.setScaleX(); codigo para mudar tamanho imagem - vertical
@@ -46,14 +46,12 @@ public class PainelHome {
         Label lblDescApp = new Label("Software para Gestão de Jogos");
         lblDescApp.setStyle("-fx-font-weight: regular ; -fx-font-size: 25 ; -fx-text-fill: #ffffff");
 
-
         // Criar Painel de Contatos
         VBox painelContatos = new VBox(2);
         painelContatos.setStyle("-fx-background-color: #6ad2ee; -fx-border-width: 3; -fx-border-color:blue;-fx-border-radius:16;-fx-background-radius: 16");
         painelContatos.setMaxWidth(600);
         painelContatos.setPadding(new Insets(20));
         VBox.setMargin(painelContatos, new Insets(25,10,40,10));
-
 
         Label lblTituloEmail = new Label("E-mail para Suporte:");
         lblTituloEmail.setStyle("-fx-font-size: 18; -fx-font-weight: bold");
@@ -64,14 +62,12 @@ public class PainelHome {
         Label lblTelefone = new Label("(11)1234-5678");
         lblTelefone.setStyle("-fx-font-size: 15");
 
-
         painelContatos.getChildren().addAll(
                 lblTituloEmail,
                 lblEmail,
                 lblTituloTelefone,
                 lblTelefone
         );
-
 
         Label lblDesenvolvidoPor = new Label("Desenvolvido por AleixoSoft - 2026");
         lblDesenvolvidoPor.setStyle("-fx-font-size: 20;-fx-text-fill: #ffffff; -fx-font-weight: bold");
