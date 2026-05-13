@@ -41,6 +41,7 @@ public class TelaJogo {
 
         raiz.setTop(criarPainelTitulo());
         raiz.setCenter(criarFormulario());
+        raiz.setBottom(criarPainelBotoes());
 
         Scene cena = new Scene(raiz, 500,500);
 
@@ -56,8 +57,10 @@ public class TelaJogo {
         painelTitulo.setAlignment(Pos.CENTER_LEFT);
 
         // Imagem do Titulo
-        Image image = new Image(getClass().getResourceAsStream("/imagens/adicionar.png"));
+        Image image = new Image(getClass().getResourceAsStream("/imagens/JoyStick.png"));
         ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(45);
+        imageView.setFitWidth(45);
 
         // Texto do Titulo
         Label lblTitulo = new Label("Cadastro de Jogos");
@@ -80,8 +83,13 @@ public class TelaJogo {
         );
 
         VBox formulario = new VBox();
+        formulario.setPadding(new Insets(15));
+        //formulario.setStyle("-fx-border-width: 4; -fx-border-color: #1f4450");
 
-        GridPane gridFormulario = new GridPane();
+        GridPane gridFormulario = new GridPane(6,6);
+        gridFormulario.setGridLinesVisible(false);
+        gridFormulario.setPadding(new Insets(30));
+        gridFormulario.setStyle("-fx-border-width: 1; -fx-border-color: #1f4450; -fx-border-radius: 10");
 
         // Criar Componentes inseridos no Grid
         Label lblId = new Label("ID: ");
@@ -98,6 +106,16 @@ public class TelaJogo {
         Label lblEstudio = new Label("Estudio: ");
         comboEstudio = new ComboBox<>(estudio);
 
+        Label lblValor = new Label("Valor: ");
+        tfValor = new TextField();
+        tfValor.setPromptText("Ex. 9,99");
+
+        Label lblDataLancamento = new Label("Data de Lancamento: ");
+        dpDataLancamento = new DatePicker();
+
+        Label lblFinalizado = new Label("");
+        cbFinalizado = new CheckBox("Finalizado");
+
 
         // Adicionar os Componentes no Grid
         gridFormulario.add(lblId, 0, 0);
@@ -112,9 +130,44 @@ public class TelaJogo {
         gridFormulario.add(lblEstudio, 0, 3);
         gridFormulario.add(comboEstudio, 1, 3);
 
+        gridFormulario.add(lblValor, 0, 4);
+        gridFormulario.add(tfValor, 1, 4);
+
+        gridFormulario.add(lblDataLancamento, 0, 5);
+        gridFormulario.add(dpDataLancamento, 1, 5);
+
+        gridFormulario.add(lblFinalizado, 0, 6);
+        gridFormulario.add(cbFinalizado, 1, 6);
 
         formulario.getChildren().add(gridFormulario);
 
         return formulario;
+    }
+
+    private HBox criarPainelBotoes(){
+        HBox painelBotoes = new HBox(15);
+        painelBotoes.setStyle("-fx-background-color: #538695");
+        painelBotoes.setPadding(new Insets(10));
+        painelBotoes.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnSalvar = new Button();
+        btnSalvar.setTooltip(new Tooltip("Salvar"));
+        Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/salvar.png"));
+        ImageView ivSalvar = new ImageView(imgSalvar);
+        ivSalvar.setFitHeight(35);
+        ivSalvar.setFitWidth(35);
+        btnSalvar.setGraphic(ivSalvar);
+
+        Button btnCancelar = new Button();
+        btnCancelar.setTooltip(new Tooltip("Cancelar"));
+        Image imgCancelar = new Image(getClass().getResourceAsStream("/imagens/Botao-X.png"));
+        ImageView ivCancelar = new ImageView(imgCancelar);
+        ivCancelar.setFitHeight(35);
+        ivCancelar.setFitWidth(35);
+        btnCancelar.setGraphic(ivCancelar);
+
+        painelBotoes.getChildren().addAll(btnSalvar, btnCancelar);
+
+        return painelBotoes;
     }
 }
