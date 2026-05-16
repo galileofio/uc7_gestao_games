@@ -19,6 +19,9 @@ public class Jogo {
         this.plataforma = plataforma;
     }
 
+    // Construtor Default/Padrão
+    public Jogo(){}
+
     public int getId() {
         return id;
     }
@@ -81,5 +84,19 @@ public class Jogo {
 
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
+    }
+
+    @Override
+    public String toString() {
+        return "Jogo{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", plataforma='" + plataforma + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", estudio='" + estudio + '\'' +
+                ", preco=" + preco +
+                ", dataLancamento=" + dataLancamento +
+                ", finalizado=" + finalizado +
+                '}';
     }
 }

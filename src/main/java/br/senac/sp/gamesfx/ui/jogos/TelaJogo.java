@@ -1,5 +1,7 @@
 package br.senac.sp.gamesfx.ui.jogos;
 
+import br.senac.sp.gamesfx.data.repository.JogoRepository;
+import br.senac.sp.gamesfx.model.Jogo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -157,6 +159,23 @@ public class TelaJogo {
         ivSalvar.setFitHeight(35);
         ivSalvar.setFitWidth(35);
         btnSalvar.setGraphic(ivSalvar);
+
+        btnSalvar.setOnAction(e -> {
+
+            Jogo jogo = new Jogo();
+            jogo.setTitulo(tfTitulo.getText());
+            jogo.setPlataforma(comboPlataforma.getValue());
+            jogo.setEstudio(comboEstudio.getValue());
+            jogo.setDataLancamento(dpDataLancamento.getValue());
+            jogo.setCategoria("Jogo");
+            jogo.setFinalizado(cbFinalizado.isSelected());
+            jogo.setPreco(Double.parseDouble(tfValor.getText()));
+
+            // Criar o repositorio para enviar o jogo
+            JogoRepository repository = new JogoRepository();
+            repository.salvar(jogo);
+
+        });
 
         Button btnCancelar = new Button();
         btnCancelar.setTooltip(new Tooltip("Cancelar"));
