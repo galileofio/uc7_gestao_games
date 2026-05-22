@@ -48,6 +48,7 @@ public class JogoRepository {
 
             }
 
+            ConexaoSQLite.fecharConexao();
             return listaJogos;
 
         } catch (SQLException e) {
@@ -81,12 +82,64 @@ public class JogoRepository {
             stm.setString(6, jogo.getDataLancamento().toString());
             stm.setInt(7, jogo.isFinalizado() ? 1 : 0);
             stm.executeUpdate();
+            ConexaoSQLite.fecharConexao();
+
         } catch (SQLException e) {
             System.out.println("Erro ao Salvar o Jogo");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
+        // aqui vai o codigo para contar total de jogos
+
     }
 
+    public int excluir(int id) {
+
+        String sql = "DELETE FROM tb_games WHERE id = ?";
+
+        try {
+            PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
+            stm.setInt(1, id);
+
+            int resultado = stm.executeUpdate();
+
+            ConexaoSQLite.fecharConexao();
+
+            return resultado;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public void editar(Jogo jogo) {
+        String sql = "UPDATE tb_games SET " +
+                "titulo = ?," +
+                "plataforma = ?," +
+                "estudio = ?," +
+                "categoria = ?," +
+                "preco = ?," +
+                "data_lancamento = ?," +
+                "finalizado = ? " +
+                "WHERE id = ?;";
+
+        try {
+            PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
+            stm.setString(1, jogo.getTitulo());
+            stm.setString(2, jogo.getPlataforma());
+            stm.setString(3, jogo.getEstudio());
+            stm.setString(4, jogo.getCategoria());
+            stm.setDouble(5, jogo.getPreco());
+            stm.setString(6, jogo.getDataLancamento().toString());
+            stm.setInt(7, jogo.isFinalizado() ? 1 : 0);
+            stm.setInt(8, jogo.getId());
+            stm.executeUpdate();
+            ConexaoSQLite.fecharConexao();
+        } catch (SQLException e) {
+            System.out.println("Erro na gravação!");
+            e.printStackTrace();
+        }
+    }
 }

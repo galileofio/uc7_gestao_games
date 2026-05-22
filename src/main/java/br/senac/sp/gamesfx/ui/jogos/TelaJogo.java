@@ -17,15 +17,31 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.time.LocalDate;
+import java.util.Optional;
+
 public class TelaJogo {
 
-    private TextField tfId;
-    private TextField tfTitulo;
-    private TextField tfValor;
-    private ComboBox<String> comboPlataforma;
-    private ComboBox<String> comboEstudio;
-    private DatePicker dpDataLancamento;
-    private CheckBox cbFinalizado;
+    private TextField tfId = new TextField();
+    private TextField tfTitulo =  new TextField();
+    private TextField tfValor =  new TextField();
+    private ComboBox<String> comboPlataforma =  new ComboBox<>();
+    private ComboBox<String> comboEstudio =   new ComboBox<>();
+    private DatePicker dpDataLancamento = new DatePicker();
+    private CheckBox cbFinalizado =   new CheckBox("Finalizado");
+
+    public TelaJogo(Jogo jogo) {
+        tfId.setText(String.valueOf(jogo.getId()));
+        tfTitulo.setText(jogo.getTitulo());
+        tfValor.setText(String.valueOf(jogo.getPreco()));
+        comboPlataforma.setValue(jogo.getPlataforma());
+        comboEstudio.setValue(jogo.getEstudio());
+        dpDataLancamento.setValue(jogo.getDataLancamento());
+        cbFinalizado.setSelected(jogo.isFinalizado());
+    }
+
+    public TelaJogo() {}
 
     public void criarTela(Stage stagePai) {
 
@@ -43,7 +59,7 @@ public class TelaJogo {
 
         raiz.setTop(criarPainelTitulo());
         raiz.setCenter(criarFormulario());
-        raiz.setBottom(criarPainelBotoes());
+        raiz.setBottom(criarPainelBotoes(stage));
 
         Scene cena = new Scene(raiz, 500,500);
 
@@ -95,28 +111,29 @@ public class TelaJogo {
 
         // Criar Componentes inseridos no Grid
         Label lblId = new Label("ID: ");
-        tfId = new TextField();
-        tfId.setEditable(false);
+        //tfId = new TextField();
+        //tfId.setEditable(false);
+        tfId.setDisable(true);
 
         Label lblTitulo = new Label("Titulo: ");
-        tfTitulo = new TextField();
+        //tfTitulo = new TextField();
         tfTitulo.setPromptText("Ex. Super Mario World");
 
         Label lblPlataforma = new Label("Plataforma: ");
-        comboPlataforma = new ComboBox<>(plataformas);
+        comboPlataforma.setItems(plataformas);
 
         Label lblEstudio = new Label("Estudio: ");
-        comboEstudio = new ComboBox<>(estudio);
+        comboEstudio.setItems(estudio);
 
         Label lblValor = new Label("Valor: ");
-        tfValor = new TextField();
+        //tfValor = new TextField();
         tfValor.setPromptText("Ex. 9,99");
 
         Label lblDataLancamento = new Label("Data de Lancamento: ");
-        dpDataLancamento = new DatePicker();
+        //dpDataLancamento = new DatePicker();
 
         Label lblFinalizado = new Label("");
-        cbFinalizado = new CheckBox("Finalizado");
+        //cbFinalizado = new CheckBox("Finalizado");
 
 
         // Adicionar os Componentes no Grid
@@ -146,7 +163,7 @@ public class TelaJogo {
         return formulario;
     }
 
-    private HBox criarPainelBotoes(){
+    private HBox criarPainelBotoes(Stage stage) {
         HBox painelBotoes = new HBox(15);
         painelBotoes.setStyle("-fx-background-color: #538695");
         painelBotoes.setPadding(new Insets(10));
@@ -173,7 +190,51 @@ public class TelaJogo {
 
             // Criar o repositorio para enviar o jogo
             JogoRepository repository = new JogoRepository();
-            repository.salvar(jogo);
+
+            if(tfId.getText().equals("")) {
+                repository.salvar(jogo);
+
+                //mensagem pos salvar
+                Alert mensagemSalvar = new Alert(Alert.AlertType.CONFIRMATION);
+                mensagemSalvar.setTitle("Atualização de Jogo");
+                mensagemSalvar.setHeaderText("Jogo Salvo com Sucesso!");
+                mensagemSalvar.setContentText("Deseja Salvar Outro Jogo?");
+
+                Optional<ButtonType> escolha = mensagemSalvar.showAndWait();
+
+                if(escolha.get() == ButtonType.OK) {
+                    limparCampos();
+                } else{
+                    stage.close();
+                }
+
+            }else{
+                jogo.setId(Integer.parseInt(tfId.getText()));
+                repository.editar(jogo);
+
+                // mostrar mensagem pos editar
+                Alert mensagemEditar = new Alert(Alert.AlertType.INFORMATION);
+                mensagemEditar.setTitle("Atualização de Jogo");
+                mensagemEditar.setHeaderText("Jogo Atualizado com Sucesso!");
+                //mensagemEditar.setContentText("Deseja Alterar Outro Jogo?");
+
+                mensagemEditar.showAndWait();
+                stage.close();
+            }
+
+            //JOptionPane.showMessageDialog(null, "Jogo salvo com sucesso!");
+//            int resposta = JOptionPane.showConfirmDialog(
+//                    null,
+//                    "Jogo Salvo!\nDeseja Cadastrar outro Jogo?",
+//                    "Cadastro",
+//                    JOptionPane.YES_NO_OPTION
+//            );
+//
+//            if (resposta != 0){
+//                stage.close();
+//            }
+
+            //limparCampos();
 
         });
 
@@ -188,5 +249,18 @@ public class TelaJogo {
         painelBotoes.getChildren().addAll(btnSalvar, btnCancelar);
 
         return painelBotoes;
+    }
+
+    private void limparCampos() {
+
+        tfTitulo.clear();
+        tfId.clear();
+        tfValor.clear();
+        comboEstudio.setValue("");
+        comboPlataforma.setValue("");
+        cbFinalizado.setSelected(false);
+        dpDataLancamento.setValue(LocalDate.now());
+        tfTitulo.requestFocus();
+
     }
 }
