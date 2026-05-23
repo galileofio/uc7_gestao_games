@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -28,16 +29,28 @@ public class PainelHome {
 
         painelTitulo.getChildren().addAll(lblTitulo,new Separator());
 
-        VBox painelLogo = new VBox();
-        painelLogo.setAlignment(Pos.CENTER);
+        HBox painelLogo2 = new HBox();
+        painelLogo2.setAlignment(Pos.BOTTOM_CENTER);
+
+        HBox.setHgrow(painelLogo2, Priority.ALWAYS);
+
+        //VBox painelLogo = new VBox();
+        //painelLogo.setAlignment(Pos.CENTER);
 
         // Imagem da Aplicação - para 2 imagens tem que usar HBox e criar exclusivo para elas
-        Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/ghost.png"));
-        //Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/PacMan.png"));
-        ImageView ivLogo = new ImageView(imgLogo);
-        //ivLogo.setScaleX(); codigo para mudar tamanho imagem - horizontal
-        //ivLogo.setScaleX(); codigo para mudar tamanho imagem - vertical
+        Image imgLogo1 = new Image(getClass().getResourceAsStream("/imagens/PacMan.png"));
+        ImageView ivLogo1 = new ImageView(imgLogo1);
 
+        Image imgLogo2 = new Image(getClass().getResourceAsStream("/imagens/ghost.png"));
+        ImageView ivLogo2 = new ImageView(imgLogo2);
+
+        //ivLogo2.setScaleX(1); codigo para mudar tamanho imagem - horizontal
+        //ivLogo2.setScaleX(1); codigo para mudar tamanho imagem - vertical
+
+        //HBox.setHgrow(painelLogo2, Priority.ALWAYS);
+
+        VBox painelLogo = new VBox();
+        painelLogo.setAlignment(Pos.CENTER);
         VBox.setVgrow(painelLogo, Priority.ALWAYS);
 
         // Textos com nome e descrição da aplicação
@@ -73,9 +86,9 @@ public class PainelHome {
         Label lblDesenvolvidoPor = new Label("Desenvolvido por AleixoSoft - 2026");
         lblDesenvolvidoPor.setStyle("-fx-font-size: 20;-fx-text-fill: #ffffff; -fx-font-weight: bold");
 
-        painelLogo.getChildren().addAll(ivLogo,lblNomeApp,lblDescApp,painelContatos, lblDesenvolvidoPor);
+        painelLogo.getChildren().addAll(ivLogo1, ivLogo2,lblNomeApp,lblDescApp,painelContatos, lblDesenvolvidoPor);
 
-        painelPrincipal.getChildren().addAll(painelTitulo,painelLogo);
+        painelPrincipal.getChildren().addAll(painelTitulo,painelLogo, painelLogo2);
         return painelPrincipal;
     }
 }
