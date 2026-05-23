@@ -30,12 +30,12 @@ public class PainelHome {
         painelTitulo.getChildren().addAll(lblTitulo,new Separator());
 
         HBox painelLogo2 = new HBox();
-        painelLogo2.setAlignment(Pos.BOTTOM_CENTER);
+        //painelLogo2.setAlignment(Pos.BOTTOM_CENTER);
 
         HBox.setHgrow(painelLogo2, Priority.ALWAYS);
 
         //VBox painelLogo = new VBox();
-        //painelLogo.setAlignment(Pos.CENTER);
+        painelLogo2.setAlignment(Pos.CENTER);
 
         // Imagem da Aplicação - para 2 imagens tem que usar HBox e criar exclusivo para elas
         Image imgLogo1 = new Image(getClass().getResourceAsStream("/imagens/PacMan.png"));
@@ -43,6 +43,8 @@ public class PainelHome {
 
         Image imgLogo2 = new Image(getClass().getResourceAsStream("/imagens/ghost.png"));
         ImageView ivLogo2 = new ImageView(imgLogo2);
+
+        painelLogo2.getChildren().addAll(ivLogo1,ivLogo2);
 
         //ivLogo2.setScaleX(1); codigo para mudar tamanho imagem - horizontal
         //ivLogo2.setScaleX(1); codigo para mudar tamanho imagem - vertical
@@ -86,9 +88,9 @@ public class PainelHome {
         Label lblDesenvolvidoPor = new Label("Desenvolvido por AleixoSoft - 2026");
         lblDesenvolvidoPor.setStyle("-fx-font-size: 20;-fx-text-fill: #ffffff; -fx-font-weight: bold");
 
-        painelLogo.getChildren().addAll(ivLogo1, ivLogo2,lblNomeApp,lblDescApp,painelContatos, lblDesenvolvidoPor);
+        painelLogo.getChildren().addAll(lblNomeApp,lblDescApp,painelContatos, lblDesenvolvidoPor);
 
-        painelPrincipal.getChildren().addAll(painelTitulo,painelLogo, painelLogo2);
+        painelPrincipal.getChildren().addAll(painelTitulo,painelLogo2, painelLogo);
         return painelPrincipal;
     }
 }
