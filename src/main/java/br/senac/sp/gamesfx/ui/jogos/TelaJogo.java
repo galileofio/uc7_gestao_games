@@ -186,7 +186,17 @@ public class TelaJogo {
             jogo.setDataLancamento(dpDataLancamento.getValue());
             jogo.setCategoria("Jogo");
             jogo.setFinalizado(cbFinalizado.isSelected());
-            jogo.setPreco(Double.parseDouble(tfValor.getText()));
+
+            try {
+                jogo.setPreco(Double.parseDouble(tfValor.getText().replace(",", ".")));
+            } catch (NumberFormatException erro) {
+                Alert valorIncorreto = new Alert(Alert.AlertType.ERROR);
+                valorIncorreto.setTitle("Valor Incorreto");
+                valorIncorreto.setHeaderText("Digite apenas NÚMERO!\nUtilize PONTO(.) ou VIRGULA(,)");
+                valorIncorreto.showAndWait();
+                tfValor.requestFocus();
+                return;
+            }
 
             // Criar o repositorio para enviar o jogo
             JogoRepository repository = new JogoRepository();
@@ -212,30 +222,13 @@ public class TelaJogo {
                 jogo.setId(Integer.parseInt(tfId.getText()));
                 repository.editar(jogo);
 
-                // mostrar mensagem pos editar
+                // mensagem pos editar
                 Alert mensagemEditar = new Alert(Alert.AlertType.INFORMATION);
                 mensagemEditar.setTitle("Atualização de Jogo");
                 mensagemEditar.setHeaderText("Jogo Atualizado com Sucesso!");
-                //mensagemEditar.setContentText("Deseja Alterar Outro Jogo?");
-
                 mensagemEditar.showAndWait();
                 stage.close();
             }
-
-            //JOptionPane.showMessageDialog(null, "Jogo salvo com sucesso!");
-//            int resposta = JOptionPane.showConfirmDialog(
-//                    null,
-//                    "Jogo Salvo!\nDeseja Cadastrar outro Jogo?",
-//                    "Cadastro",
-//                    JOptionPane.YES_NO_OPTION
-//            );
-//
-//            if (resposta != 0){
-//                stage.close();
-//            }
-
-            //limparCampos();
-
         });
 
         Button btnCancelar = new Button();

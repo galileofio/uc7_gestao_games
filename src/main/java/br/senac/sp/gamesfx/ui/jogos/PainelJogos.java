@@ -121,21 +121,6 @@ public class PainelJogos {
             telaJogo.criarTela(stage);
             tabelaJogos.setItems(repository.getJogos());
 
-            //Alert confirmaAlterar = new Alert(Alert.AlertType.CONFIRMATION);
-            //confirmaAlterar.setTitle("Alterar Jogo!");
-            //confirmaAlterar.setHeaderText("O Jogo será Alterado!");
-            //confirmaAlterar.setContentText("Deseja Continuar?");
-
-            //Optional<ButtonType> resposta = confirmaAlterar.showAndWait();
-            //ButtonType botaoSelecionadoAlterar = resposta.get();
-
-            //if(botaoSelecionadoAlterar == ButtonType.OK) {
-            //    repository.excluir(jogoAlterar.getId());
-            //    tabelaJogos.setItems(repository.getJogos());
-            //}
-
-
-
         });
 
         Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");

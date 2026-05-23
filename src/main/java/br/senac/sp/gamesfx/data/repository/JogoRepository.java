@@ -56,9 +56,9 @@ public class JogoRepository {
             e.printStackTrace();
             return null;
         }
-
     }
 
+    // BOTAO SALVAR
     public void salvar(Jogo jogo) {
 
         //System.out.println(jogo);
@@ -93,7 +93,7 @@ public class JogoRepository {
         // aqui vai o codigo para contar total de jogos
 
     }
-
+    // BOTAO EXCLUIR
     public int excluir(int id) {
 
         String sql = "DELETE FROM tb_games WHERE id = ?";
@@ -114,6 +114,7 @@ public class JogoRepository {
         }
     }
 
+    // BOTAO EDITAR
     public void editar(Jogo jogo) {
         String sql = "UPDATE tb_games SET " +
                 "titulo = ?," +

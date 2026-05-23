@@ -32,7 +32,8 @@ public class PainelHome {
         painelLogo.setAlignment(Pos.CENTER);
 
         // Imagem da Aplicação - para 2 imagens tem que usar HBox e criar exclusivo para elas
-        Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/PacMan.png"));
+        Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/ghost.png"));
+        //Image imgLogo = new Image(getClass().getResourceAsStream("/imagens/PacMan.png"));
         ImageView ivLogo = new ImageView(imgLogo);
         //ivLogo.setScaleX(); codigo para mudar tamanho imagem - horizontal
         //ivLogo.setScaleX(); codigo para mudar tamanho imagem - vertical
