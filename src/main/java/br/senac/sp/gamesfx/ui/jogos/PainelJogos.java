@@ -101,6 +101,25 @@ public class PainelJogos {
         btnMostrar.setCursor(Cursor.HAND);
         //btnMostrar.setTooltip(new Tooltip("MOSTRAR"));
 
+        btnMostrar.setOnAction(e -> {
+
+            Jogo jogoMostrar = tabelaJogos.getSelectionModel().getSelectedItem();
+
+            if (jogoMostrar == null) {
+                Alert alertaJogoNSelecionado = new Alert(Alert.AlertType.INFORMATION);
+                alertaJogoNSelecionado.setTitle("Exibir Jogo");
+                alertaJogoNSelecionado.setHeaderText("Selecione um Jogo da Lista!");
+                alertaJogoNSelecionado.showAndWait();
+                return;
+            }
+
+            TelaJogo telaJogo = new TelaJogo(jogoMostrar);
+            telaJogo.criarTela(stage);
+            tabelaJogos.setItems(repository.getJogos());
+
+        });
+
+
         Button btnAlterar = criarBotao("Alterar", "/imagens/alterar.png");
         btnAlterar.setCursor(Cursor.HAND);
         //btnAlterar.setTooltip(new Tooltip("ALTERAR"));
