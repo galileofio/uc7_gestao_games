@@ -171,22 +171,7 @@ public class PainelJogos {
                 tabelaJogos.setItems(repository.getJogos());
             }
 
-           //if (resultado > 0) {
-           //    JOptionPane.showMessageDialog(null,"Jogo Excluido!");
-           //   tabelaJogos.setItems(repository.getJogos());
-           //}
-
         });
-
-//        Button btnAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
-//        btnAdicionar.setOnAction(e -> {
-//            TelaJogo telaJogo = new TelaJogo();
-//            telaJogo.criarTela(stage);
-//        });
-//
-//        Button btnMostrar = criarBotao("Mostrar", "/imagens/mostrar.png");
-//        Button btnAlterar = criarBotao("Alterar", "/imagens/alterar.png");
-//        Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
 
         painelBotoes.getChildren().addAll(btnAdicionar, btnMostrar, btnAlterar, btnExcluir);
 
