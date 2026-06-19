@@ -1,7 +1,5 @@
 package br.senac.sp.gamesfx.model;
 
-import java.time.LocalDate;
-
 public class Estudio {
 
     private int id;
@@ -33,7 +31,7 @@ public class Estudio {
         this.id = id;
     }
 
-    public String getNome_Estudio()
+    public String getNome_estudio()
     {
         return nome_estudio;
     }
@@ -68,7 +66,7 @@ public class Estudio {
         return pais_origem;
     }
 
-    public void SetPais_Origem(String pais_origem)
+    public void setPais_origem(String pais_origem)
     {
         this.pais_origem = pais_origem;
     }

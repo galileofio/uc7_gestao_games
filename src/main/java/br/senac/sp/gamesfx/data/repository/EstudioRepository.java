@@ -1,22 +1,21 @@
 package br.senac.sp.gamesfx.data.repository;
 
 import br.senac.sp.gamesfx.data.ConexaoSQLite;
-import br.senac.sp.gamesfx.model.Plataforma;
+import br.senac.sp.gamesfx.model.Estudio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class EstudioRepository {
 
-    public ObservableList<Plataforma> getPlataformas() {
+    public ObservableList<Estudio> getEstudios() {
 
-        String sql = "SELECT * FROM plataforma";
+        String sql = "SELECT * FROM Studio";
 
-        ObservableList<Plataforma> listaPlataforma = FXCollections.observableArrayList();
+        ObservableList<Estudio> listaEstudio = FXCollections.observableArrayList();
 
         try {
             PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
@@ -24,26 +23,26 @@ public class EstudioRepository {
 
             while (rs.next()){
 
-                Plataforma plataforma = new Plataforma();
+                Estudio estudio = new Estudio();
                 int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String fabricante = rs.getString("fabricante");
-                LocalDate dataLancamento = LocalDate.parse(rs.getString("data_lancamento"));
-                double valor = rs.getDouble("valor");
+                String nomeEstudio = rs.getString("nome_estudio");
+                String nomeFundador = rs.getString("nome_fundador");
+                int anoFundacao = rs.getInt("ano_fundacao");
+                String paisOrigem = rs.getString("pais_origem");
 
-                // Popular o objeto plataforma com os dados
-                plataforma.setId(id);
-                plataforma.setNome(nome);
-                plataforma.setFabricante(fabricante);
-                plataforma.setValor(valor);
-                plataforma.setDataLancamento(dataLancamento);
+                // Popular o objeto Estudio com os dados
+                estudio.setId(id);
+                estudio.setNome_Estudio(nomeEstudio);
+                estudio.setNome_fundador(nomeFundador);
+                estudio.setAno_fundacao(String.valueOf(anoFundacao));
+                estudio.setPais_origem(paisOrigem);
 
-                listaPlataforma.add(plataforma);
+                listaEstudio.add(estudio);
 
             }
 
             ConexaoSQLite.fecharConexao();
-            return listaPlataforma;
+            return listaEstudio;
 
         } catch (SQLException e) {
             System.out.println("Erro na Leitura dos Dados!");
@@ -53,23 +52,22 @@ public class EstudioRepository {
     }
 
     // BOTAO SALVAR
-    public void salvar(Plataforma plataforma) {
+    public void salvar(Estudio estudio) {
 
 
-        // Instrução SQL para cadastrar um nova plataforma no banco de dados
-        String sql = "INSERT INTO plataforma (nome, fabricante," +
-                "data_lancamento, valor" +
+        // Instrução SQL para cadastrar um novo Estudio no banco de dados
+        String sql = "INSERT INTO studio (nome_estudio, nome_fundador," +
+                "ano_fundacao, pais_origem" +
                 "VALUES (?,?,?,?)";
-
-        //System.out.println(sql);
 
         // Preparar a instrução SQL para ser enviada para o banco atraves de uma conexão
         try {
             PreparedStatement  stm = ConexaoSQLite.getConexao().prepareStatement(sql);
-            stm.setString(1, plataforma.getNome());
-            stm.setString(2, plataforma.getFabricante());
-            stm.setString(6, plataforma.getDataLancamento().toString());
-            stm.setDouble(5, plataforma.getValor());
+            stm.setString(1, estudio.getNome_estudio());
+            stm.setString(2, estudio.getNome_fundador());
+            stm.setInt(3, estudio.getAno_fundacao());
+            stm.setString(4, estudio.getPais_origem());
+
             stm.executeUpdate();
             ConexaoSQLite.fecharConexao();
 
@@ -79,13 +77,13 @@ public class EstudioRepository {
             e.printStackTrace();
         }
 
-        // aqui vai o codigo para contar total de jogos
+        // aqui vai o codigo para contar total de Estudios
 
     }
     // BOTAO EXCLUIR
     public int excluir(int id) {
 
-        String sql = "DELETE FROM plataforma WHERE id = ?";
+        String sql = "DELETE FROM studio WHERE id = ?";
 
         try {
             PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
@@ -104,21 +102,21 @@ public class EstudioRepository {
     }
 
     // BOTAO EDITAR
-    public void editar(Plataforma plataforma) {
-        String sql = "UPDATE plataforma SET " +
-                "nome = ?," +
-                "fabricante = ?," +
-                "data_lancamento = ?," +
-                "valor = ?," +
+    public void editar(Estudio estudio) {
+        String sql = "UPDATE studio SET " +
+                "nome_estudio = ?," +
+                "nome_fundador = ?," +
+                "ano_fundacao = ?," +
+                "pais_origem = ?," +
                 "WHERE id = ?;";
 
         try {
             PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
-            stm.setString(1, plataforma.getNome());
-            stm.setString(2, plataforma.getFabricante());
-            stm.setString(3, plataforma.getDataLancamento().toString());
-            stm.setDouble(4, plataforma.getValor());
-            stm.setInt(5, plataforma.getId());
+            stm.setString(1, estudio.getNome_estudio());
+            stm.setString(2, estudio.getNome_fundador());
+            stm.setInt(3, estudio.getAno_fundacao());
+            stm.setString(4, estudio.getPais_origem());
+            stm.setInt(5, estudio.getId());
             stm.executeUpdate();
             ConexaoSQLite.fecharConexao();
         } catch (SQLException e) {

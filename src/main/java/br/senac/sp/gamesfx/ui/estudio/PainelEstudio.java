@@ -1,5 +1,6 @@
 package br.senac.sp.gamesfx.ui.estudio;
 
+import br.senac.sp.gamesfx.data.repository.EstudioRepository;
 import br.senac.sp.gamesfx.data.repository.PlataformaRepository;
 import br.senac.sp.gamesfx.model.Estudio;
 import br.senac.sp.gamesfx.model.Plataforma;
@@ -66,7 +67,7 @@ public class PainelEstudio {
         colunaPais_Origem.setPrefWidth(140);
 
         // Obter os dados que serao exibidos
-        PlataformaRepository repository = new PlataformaRepository();
+        EstudioRepository repository = new EstudioRepository();
 
         // Adiciona lista de jogos na Tabela
         tabelaEstudios.setItems(repository.getEstudios());
